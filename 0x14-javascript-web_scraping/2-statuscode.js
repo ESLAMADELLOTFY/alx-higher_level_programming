@@ -1,10 +1,14 @@
 #!/usr/bin/node
-// A script that display the status code of a GET request
 
-const args = process.argv;
-let request = require('request');
-request(args[2], function (error, response, body) {
-  if (error) {
-    console.log('error:', error); // Print the error if one occurred
-  } else console.log('code:', response && response.statusCode);
-});
+const request = require('request');
+// Import the 'request' module.
+
+request.get(process.argv[2])
+// Use the 'request' module to perform an HTTP GET request to the URL.
+
+  .on('response', function (response) {
+    // Set up an event listener for the 'response' event emitted by the HTTP request.
+
+    console.log(`code: ${response.statusCode}`);
+    // Log the HTTP status code of the response to the console.
+  });
